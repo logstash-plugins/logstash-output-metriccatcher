@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "logstash/outputs/base"
 require "logstash/namespace"
-require "json"
+require "logstash/json"
 
 
 # This output ships metrics to MetricCatcher, allowing you to
@@ -98,7 +98,7 @@ class LogStash::Outputs::MetricCatcher < LogStash::Outputs::Base
             "timestamp" => event.sprintf("%{+%s}.") + Time.now.usec.to_s
           }]
 
-          @socket.send(message.to_json, 0, @host, @port)
+          @socket.send(LogStash::Json.dump(message), 0, @host, @port)
         end # instance_variable_get("@#{metric_type}").each_slice
       end # if
     end # @metric_types.each
