@@ -16,7 +16,9 @@ require "json"
 #         port => "1420"
 #         type => "apache-access"
 #         fields => [ "response" ]
-#         meter => [ "%{host}.apache.response.%{response}", "1" ]
+#         meter => {
+#             "%{host}.apache.response.%{response}" => "1"
+#             }
 #     }
 class LogStash::Outputs::MetricCatcher < LogStash::Outputs::Base
   config_name "metriccatcher"
@@ -38,7 +40,7 @@ class LogStash::Outputs::MetricCatcher < LogStash::Outputs::Base
   # for metric names and also for values. This is a hash field with key
   # of the metric name, value of the metric value. Example:
   # [source,ruby]
-  #   counter => [ "%{host}.apache.hits.%{response}, "1" ]
+  #   counter => { "%{host}.apache.hits.%{response} => "1" }
   #
   # The value will be coerced to a floating point value. Values which cannot be
   # coerced will zero (0)
@@ -72,7 +74,7 @@ class LogStash::Outputs::MetricCatcher < LogStash::Outputs::Base
   # for metric names and also for values. This is a hash field with key
   # of the metric name, value of the metric value. Example:
   # [source,ruby]
-  #   timer => [ "%{host}.apache.response_time, "%{response_time}" ]
+  #   timer => { "%{host}.apache.response_time => "%{response_time}" }
   #
   # The value will be coerced to a floating point value. Values which cannot be
   # coerced will zero (0)
