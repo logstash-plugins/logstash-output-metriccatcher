@@ -86,7 +86,7 @@ class LogStash::Outputs::MetricCatcher < LogStash::Outputs::Base
 
   public
   def receive(event)
-    return unless output?(event)
+    
 
     @@metric_types.each do |metric_type|
       if instance_variable_defined?("@#{metric_type}")
