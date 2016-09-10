@@ -3,7 +3,6 @@ require "logstash/outputs/base"
 require "logstash/namespace"
 require "logstash/json"
 
-
 # This output ships metrics to MetricCatcher, allowing you to
 # utilize Coda Hale's Metrics.
 #
@@ -86,8 +85,6 @@ class LogStash::Outputs::MetricCatcher < LogStash::Outputs::Base
 
   public
   def receive(event)
-    
-
     @@metric_types.each do |metric_type|
       if instance_variable_defined?("@#{metric_type}")
         instance_variable_get("@#{metric_type}").each do |metric_name, metric_value|
